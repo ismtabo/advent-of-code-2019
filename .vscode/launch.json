@@ -19,28 +19,75 @@
       ],
       "args": [
         "run",
-        "-d24",
-        "-p1",
-        "--sample",
+        "-d1",
+        "-p2",
+        // "--sample",
         // "--file=src/solutions/day10/sample_1.txt"
       ],
       "attachSimplePort": 9229,
       "outputCapture": "std"
     },
     {
-      "type": "pwa-node",
+      "name": "Run Deno current file",
       "request": "launch",
-      "name": "Launch Deno Test",
-      "program": "${workspaceFolder}/src/solutions/day18/partTwo/test.ts",
-      "cwd": "${workspaceFolder}",
+      "type": "pwa-node",
+      "program": "${file}",
       "runtimeExecutable": "deno",
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": [
+        "run",
+        "--unstable",
+        "--inspect-brk",
+        "--allow-all",
+      ],
+      "attachSimplePort": 9229,
+      "outputCapture": "std"
+    },
+    {
+      "name": "Run Deno Tests",
+      "request": "launch",
+      "type": "pwa-node",
+      "runtimeExecutable": "deno",
+      "cwd": "${workspaceFolder}",
       "runtimeArgs": [
         "test",
-        "--inspect-brk=127.0.0.1:9229",
+        "--inspect",
         "--allow-all",
-        // "--filter \"Day 18\""
       ],
-      "attachSimplePort": 9229
+      "port": 9229,
+      "outputCapture": "std"
     },
+    {
+      "name": "Debug Current Test File",
+      "request": "launch",
+      "type": "pwa-node",
+      "runtimeExecutable": "deno",
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": [
+        "test",
+        "${file}",
+        "--inspect-brk",
+        "--allow-all",
+      ],
+      "port": 9229,
+      "outputCapture": "std"
+    },
+    {
+      "name": "Debug Selected Test Case",
+      "request": "launch",
+      "type": "pwa-node",
+      "runtimeExecutable": "deno",
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": [
+        "test",
+        "${file}",
+        "--inspect-brk",
+        "--filter",
+        "${selectedText}",
+        "--allow-all",
+      ],
+      "port": 9229,
+      "outputCapture": "std"
+    }
   ]
 }
